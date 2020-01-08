@@ -1,10 +1,18 @@
 <div class="row mt-4">
     <div class="col-12 col-sm-12 col-md-12 col-lg-10 offset-lg-1">
         <tabset>
-            <tab heading="Active Products" id="tab1" class="row d-flex mt-4">
-                <app-product-tile [product]="product" *ngFor="let product of products" class="col col-12 col-sm-12 col-md-4 col-lg-4 mb-3"></app-product-tile>
+            <tab heading="Active Products" id="tab1">
+                <div class="row d-flex mt-4">
+                    <app-product-tile [product]="product" *ngFor="let product of products" class="col col-12 col-sm-12 col-md-4 col-lg-4 mb-3"></app-product-tile>
+                </div>
             </tab>
-            <tab heading="Archived Products"></tab>
+            <tab heading="Archived Products">
+                <div class="row d-flex mt-4">
+                    <alert type="info w-100">
+                        <strong>No Archived Products</strong> No archived products found
+                    </alert>
+                </div>
+            </tab>
         </tabset>
     </div>
 </div>

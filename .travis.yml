@@ -13,18 +13,18 @@ cache:
 
 addons:
   sonarcloud:
-    organization: "wpocanvas"
-    
+    organization: 'wpocanvas'
+
 script:
   - npm install
   - npm run-script build:prod
-  - sonar-scanner
-  
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then sonar-scanner; fi' # sonar only on non-PRs
+
 deploy:
   provider: s3
   skip_cleanup: true
   access_key_id: AKIAW5B3DWY7XATC7I35
-  secret_access_key: "$SECRET_ACCESS_KEY"
+  secret_access_key: '$SECRET_ACCESS_KEY'
   bucket: audit-tool-frontend
   local-dir: dist/angular-boiler-plate
   acl: public_read
@@ -32,4 +32,4 @@ deploy:
     repo: WPOCanvas/Audit-Tool-Frontend
     branches:
       only:
-      - master
+        - master

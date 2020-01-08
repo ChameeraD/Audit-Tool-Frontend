@@ -9,6 +9,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 /* fontawesome module import */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -20,6 +21,8 @@ import { ViewPhasesComponent } from './containers/view-phases/view-phases.compon
 import { ProductTileComponent } from './components/product-tile/product-tile.component';
 import { PhaseTileComponent } from './components/phase-tile/phase-tile.component';
 import { ViewQuestionsComponent } from './containers/view-questions/view-questions.component';
+import { KnowledgeAreaSlideComponent } from './components/knowledge-area-slide/knowledge-area-slide.component';
+import { EvidenceBoxComponent } from './components/evidence-box/evidence-box.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { ViewQuestionsComponent } from './containers/view-questions/view-questio
     ProductTileComponent,
     PhaseTileComponent,
     ViewQuestionsComponent,
+    KnowledgeAreaSlideComponent,
+    EvidenceBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +43,7 @@ import { ViewQuestionsComponent } from './containers/view-questions/view-questio
     ProgressbarModule.forRoot(),
     ButtonsModule.forRoot(),
     CarouselModule.forRoot(),
+    AlertModule.forRoot(),
     FontAwesomeModule,
     HttpClientModule,
     AngularEditorModule,

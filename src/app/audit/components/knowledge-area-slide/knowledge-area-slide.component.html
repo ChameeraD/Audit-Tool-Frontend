@@ -1,0 +1,20 @@
+<a
+  [routerLink]="[
+    '/audit/products/',
+    productId,
+    'phases',
+    phaseId,
+    'knowledgeAreas',
+    knowledgeArea.id,
+    'question'
+  ]"
+>
+  <slide>
+    <div class="d-flex align-items-center justify-content-center">
+      <div>
+        <p class="mb-0">{{ knowledgeArea.name }}</p>
+        <small class="secondary">{{ knowledgeArea.score }}/3 completed</small>
+      </div>
+    </div>
+  </slide>
+</a>

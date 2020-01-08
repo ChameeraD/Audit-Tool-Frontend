@@ -1,16 +1,33 @@
 <div class="card mb-3">
-    <div class="card-body">
-        <p class="h6">{{phase.name}}<span class="ml-3 text-secondary">{{phase.score}}/5 Completed</span></p>
-        <div
-            class="d-flex flex-column flex-sm-column flex-md-column flex-lg-row align-items-lg-start justify-content-lg-between">
-            <div class="pr-lg-2">
-                <p class="mb-0">{{phase.description}}</p>
-            </div>
-            <div class="pl-lg-2 flex-grow-1 mt-3 mt-sm-3 mt-lg-0">
-                <button type="button" class="btn btn-primary" style="white-space: nowrap;" [routerLink]="['/audit/products/', productId, 'phases', phase.productPhaseId]">
-                    Take the audit
-                </button>
-            </div>
-        </div>
+  <div class="card-body">
+    <p class="h6">
+      {{ phase.name
+      }}<span class="ml-3 text-secondary">{{ phase.score }}/5 Completed</span>
+    </p>
+    <div
+      class="d-flex flex-column flex-sm-column flex-md-column flex-lg-row align-items-lg-start justify-content-lg-between"
+    >
+      <div class="pr-lg-2">
+        <p class="mb-0">{{ phase.description }}</p>
+      </div>
+      <div class="pl-lg-2 flex-grow-1 mt-3 mt-sm-3 mt-lg-0">
+        <button
+          type="button"
+          class="btn btn-primary"
+          style="white-space: nowrap;"
+          [routerLink]="[
+            '/audit/products/',
+            productId,
+            'phases',
+            phase.productPhaseId,
+            'knowledgeAreas',
+            1,
+            'question'
+          ]"
+        >
+          Take the audit
+        </button>
+      </div>
     </div>
+  </div>
 </div>

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:3000'
-  // host: 'https://53ph0bulw2.execute-api.ap-south-1.amazonaws.com/dev'
+  host: 'http://localhost:3000',
+  // host: 'https://53ph0bulw2.execute-api.ap-south-1.amazonaws.com/dev',
 };
 
 /*
@@ -15,4 +15,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/dist/zone-error'; // Included with Angular CLI.

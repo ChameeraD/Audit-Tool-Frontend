@@ -38,6 +38,5 @@ export class ViewPhasesComponent implements OnInit {
 
   async getProductDetails(id: number) {
     this.products = await this.productApiService.getById(id);
-    console.log(this.products);
   }
 }

@@ -1,100 +1,41 @@
 <div class="row mt-2">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-10 offset-lg-1">
-        <nav aria-label="breadcrumb" class="mt-4">
-        <ol class="breadcrumb bg-white px-0">
-            <li class="breadcrumb-item"><a href="#">Product</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Product Name</li>
-        </ol>
-        </nav>
-        <h5 class="mb-4">Knowledge Areas</h5>
-        <div class="col-12 bg-light py-3 rounded-lg">
-            <carousel [itemsPerSlide]="5" [singleSlideOffset]="false" [indicatorsByChunk]="true" [showIndicators]="false" [interval]="0">
-                <slide>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div>
-                            <p class="mb-0">Knowledge Area1</p>
-                            <small class="secondary">0/3 completed</small>
-                        </div>
-                    </div>
-                </slide>
-                <slide>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div>
-                            <p class="mb-0">Knowledge Area1</p>
-                            <small class="secondary">0/3 completed</small>
-                        </div>
-                    </div>
-                </slide>
-                <slide>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div>
-                            <p class="mb-0">Knowledge Area1</p>
-                            <small class="secondary">0/3 completed</small>
-                        </div>
-                    </div>
-                </slide>
-                <slide>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div>
-                            <p class="mb-0">Knowledge Area1</p>
-                            <small class="secondary">0/3 completed</small>
-                        </div>
-                    </div>
-                </slide>
-                <slide>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div>
-                            <p class="mb-0">Knowledge Area1</p>
-                            <small class="secondary">0/3 completed</small>
-                        </div>
-                    </div>
-                </slide>
-                <slide>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div>
-                            <p class="mb-0">Knowledge Area1</p>
-                            <small class="secondary">0/3 completed</small>
-                        </div>
-                    </div>
-                </slide>
-            </carousel>
-        </div> 
-        
-        <div class="mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <p class="h6">1. Product name</p>
-                    <div class="d-flex mb-3">
-                        <p class="text-secondary mb-0">
-                            Define the competition within your industry. Identify the companies that share the market with products or services that are in both direct and indirect competition with your business
-                        </p>
-                    </div>
-                    <div class="d-flex">
-                        <angular-editor [placeholder]="'Enter text here...'"></angular-editor>
-                    </div>
-                </div>
-                <div class="card-footer bg-white">
-                    <div class="footer-actions d-flex align-items-center justify-content-between">
-                        <div>
-                            <button type="button" class="btn btn-outline-primary">Add</button>
-                        </div>
-                        <div>
-                            <div class="input-group" style="min-width:320px;">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Status</label>
-                                  </div>
-                                  <select class="custom-select" id="inputGroupSelect01">
-                                    <option value="1">Fully Complied</option>
-                                    <option value="2">Partialy Complied</option>
-                                    <option value="3">Not Complied</option>
-                                    <option value="3">Not Applicable</option>
-                                  </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+  <div class="col-12 col-sm-12 col-md-12 col-lg-10 offset-lg-1">
+    <nav aria-label="breadcrumb" class="mt-4">
+      <ol class="breadcrumb bg-white px-0">
+        <li class="breadcrumb-item"><a href="#">Product</a></li>
+        <li
+          class="breadcrumb-item active"
+          aria-current="page"
+          *ngIf="product != null"
+        >
+          {{ product[0].name }}
+        </li>
+      </ol>
+    </nav>
+    <h5 class="mb-4">Knowledge Areas</h5>
+    <div *ngIf="items.length" class="col-12 bg-light py-3 rounded-lg">
+      <carousel
+        *ngIf="items != null"
+        [itemsPerSlide]="lcarouselLength"
+        [singleSlideOffset]="true"
+        [indicatorsByChunk]="true"
+        [showIndicators]="false"
+        [interval]="0"
+      >
+        <app-knowledge-area-slide
+          [knowledgeArea]="item"
+          [productId]="productId"
+          [phaseId]="phaseId"
+          *ngFor="let item of items; let index = index"
+        ></app-knowledge-area-slide>
+      </carousel>
+      <div class="mt-5">
+        <app-evidence-box
+          [question]="question"
+          [index]="index"
+          *ngFor="let question of questions; let index = index"
+        ></app-evidence-box>
+      </div>
     </div>
+  </div>
 </div>
