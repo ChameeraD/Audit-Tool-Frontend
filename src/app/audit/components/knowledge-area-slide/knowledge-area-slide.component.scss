@@ -1,0 +1,17 @@
+@import "../../../../assets/scss/theme";
+
+.slide-width {
+    width:100% !important;
+    margin-right:16px;
+    margin-left:16px;
+}
+
+.text-color{
+    color:$secondary;
+}
+
+.is-active{
+    color:$primary;
+}
+
+

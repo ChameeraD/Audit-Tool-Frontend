@@ -10,7 +10,6 @@ import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 export class ProductTileComponent implements OnInit {
   faEllipsisV = faEllipsisV;
 
-
   @Input() product: Product;
 
   constructor() { }

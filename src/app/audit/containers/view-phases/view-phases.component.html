@@ -4,7 +4,7 @@
       <div class="card-body">
         <div class="d-flex flex-row justify-content-between align-items-start">
           <div>
-            <img src="http://via.placeholder.com/300" width="48px" height="48px" class="rounded-circle" />
+            <p class="avatarLetters" data-letters="MN"></p>
           </div>
           <div class="ml-3">
             <p class="h6">{{products[0].name}}</p>
@@ -13,7 +13,7 @@
         </div>
         <div class="d-flex flex-column align-items-end">
           <p class="text-secondary mb-1"><b>0/9 Completed</b></p>
-          <progressbar style="height: 8px;" [value]="55"></progressbar>
+          <progressbar style="height: 8px;" [value]="55" type="success"></progressbar>
         </div>
       </div>
     </div>

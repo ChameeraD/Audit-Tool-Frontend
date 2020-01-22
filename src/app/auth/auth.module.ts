@@ -3,13 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-
+import { AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
 
 @NgModule({
   declarations: [AuthComponent],
-  imports: [
-    CommonModule,
-    AuthRoutingModule
-  ]
+  imports: [CommonModule, AuthRoutingModule, AmplifyAngularModule],
+  providers: [AmplifyService],
 })
-export class AuthModule { }
+export class AuthModule {}

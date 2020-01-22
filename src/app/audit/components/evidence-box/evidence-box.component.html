@@ -1,41 +1,48 @@
-<div class="card" style="margin-bottom: 50px;">
+<div class="card border-0 mb-4">
   <div class="card-body">
     <p class="h6">{{ index + 1 }}. {{ question.title }}</p>
-    <div class="d-flex mb-3">
+    <div class="d-flex mb-1">
       <p class="text-secondary mb-0">
         {{ question.description }}
       </p>
     </div>
     <div class="d-flex">
-      <div class="container mt-3 ">
+      <div class="container mt-3">
         <div class="row justify-content-center">
-          <div #editable class=" col-6" style="min-height: 25vh;"></div>
+          <div #editable class="col-12 px-0"></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-footer bg-white">
+  <div class="card-footer bg-white border-0">
     <div
-      class="footer-actions d-flex align-items-center justify-content-between"
-    >
-      <div>
-        <button type="button" class="btn btn-outline-primary">
+      class="footer-actions d-flex flex-column flex-md-row align-items-md-center justify-content-md-between">
+      <div class="mb-md-0 mb-2">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="postEvidenceByQuestionId(question.id, selectedStatus)"
+          [disabled]="isAddButtonClicked || !selectedStatus"
+        >
           Add
         </button>
       </div>
       <div>
         <div class="input-group" style="min-width:320px;">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01"
-              >Status</label
-            >
+            <label class="input-group-text" for="inputGroupSelect01">
+              <fa-icon [icon]="faSpinner" class="text-secondary fa-spin mr-2"></fa-icon>Status</label>
           </div>
-          <select class="custom-select" id="inputGroupSelect01">
-            <option value="1">Fully Complied</option>
-            <option value="2">Partialy Complied</option>
-            <option value="3">Not Complied</option>
-            <option value="3">Not Applicable</option>
-          </select>
+          <ng-select
+            class="custom-select"
+            [items]="statusDropDowns"
+            bindLabel="value"
+            bindValue="id"
+            [(ngModel)]="selectedStatus"
+            (change)="updateStatus($event)"
+            placeholder="Select Status"
+          >
+          </ng-select>
         </div>
       </div>
     </div>

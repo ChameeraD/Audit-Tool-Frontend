@@ -8,13 +8,13 @@
     knowledgeArea.id,
     'question'
   ]"
+  [routerLinkActive]="['is-active']"
+  class="d-flex text-color"
 >
-  <slide>
-    <div class="d-flex align-items-center justify-content-center">
-      <div>
-        <p class="mb-0">{{ knowledgeArea.name }}</p>
-        <small class="secondary">{{ knowledgeArea.score }}/3 completed</small>
-      </div>
+  <slide class="slide-width">
+    <div style="text-align: center;">
+      <p class="mb-0">{{ knowledgeArea.name }}</p>
+      <small class="secondary">{{ knowledgeArea.score }}/3 completed</small>
     </div>
   </slide>
 </a>

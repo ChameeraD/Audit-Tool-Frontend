@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { ProductApiService } from '@shared/services/api/product.api.service';
 import { Product } from '@shared/models/product';
+import { AuthService } from '@shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-view-products',
@@ -13,7 +14,8 @@ export class ViewProductsComponent implements OnInit {
 
   products: Product[];
 
-  constructor(private productApi: ProductApiService) { }
+  constructor(private productApi: ProductApiService,
+              private authService: AuthService) { }
 
   async ngOnInit() {
     this.products = await this.productApi.get();

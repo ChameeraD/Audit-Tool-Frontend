@@ -1,0 +1,8 @@
+.custom-select {
+  padding: 0;
+}
+
+
+::ng-deep.ng-select .ng-select-container {
+  border: none !important;
+}

@@ -13,7 +13,7 @@
       </ol>
     </nav>
     <h5 class="mb-4">Knowledge Areas</h5>
-    <div *ngIf="items.length" class="col-12 bg-light py-3 rounded-lg">
+    <div *ngIf="items.length" class="col-12 py-3">
       <carousel
         *ngIf="items != null"
         [itemsPerSlide]="lcarouselLength"
@@ -27,6 +27,7 @@
           [productId]="productId"
           [phaseId]="phaseId"
           *ngFor="let item of items; let index = index"
+          style="width:100%"
         ></app-knowledge-area-slide>
       </carousel>
       <div class="mt-5">

@@ -1,12 +1,12 @@
 <div class="card border-0 shadow-sm">
   <a [routerLink]="['/audit/products/', product.id, 'phases']">
     <div class="card-header d-flex flex-row justify-content-between align-items-start bg-white border-0">
-      <img src="http://via.placeholder.com/300" width="48px" height="48px" class="rounded-circle" alt="" />
+      <ngx-avatar bgColor=#8e44ad name="{{product.name}}"></ngx-avatar>
       <fa-icon [icon]="faEllipsisV" class="text-secondary"></fa-icon>
     </div>
     <div class="card-body pt-0">
       <p class="h6 text-dark">{{ product.name }}</p>
-      <p class="mt-3">{{ product.description }}</p>
+      <p class="mt-3 text-dark">{{ product.description }}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta felis tellus.</p>
       <div class="facePile d-flex flex-row justify-content-center align-items-center py-3">
         <div class="facePile-img">
           <img src="http://www.facetheforce.today/random/400?r=1" width="32px" height="32px" class="rounded-circle"
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="progressBar pt-5 pb-1">
-        <progressbar style="height: 8px;" [value]="55"></progressbar>
+        <progressbar style="height: 8px;" [value]="55" type="success"></progressbar>
       </div>
     </div>
   </a>

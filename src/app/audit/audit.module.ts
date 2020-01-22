@@ -23,6 +23,11 @@ import { PhaseTileComponent } from './components/phase-tile/phase-tile.component
 import { ViewQuestionsComponent } from './containers/view-questions/view-questions.component';
 import { KnowledgeAreaSlideComponent } from './components/knowledge-area-slide/knowledge-area-slide.component';
 import { EvidenceBoxComponent } from './components/evidence-box/evidence-box.component';
+import { AvatarModule } from 'ngx-avatar';
+import { AuthService } from '@shared/services/auth/auth.service';
+/* for drop-downs */
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -47,6 +52,11 @@ import { EvidenceBoxComponent } from './components/evidence-box/evidence-box.com
     FontAwesomeModule,
     HttpClientModule,
     AngularEditorModule,
+    NgSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AvatarModule,
   ],
+  providers: [AuthService]
 })
 export class AuditModule {}
