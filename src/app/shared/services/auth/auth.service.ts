@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AmplifyService } from 'aws-amplify-angular';
+
 
 @Injectable()
 export class AuthService {
-  constructor(public jwtHelper: JwtHelperService) {}
   token: any;
+  logged: Promise<boolean>;
+
+  constructor(public jwtHelper: JwtHelperService,
+              public amplify: AmplifyService) {
+  }
+
   public async isAuthenticated() {
     try {
       const session = await Auth.currentSession();
@@ -20,8 +27,6 @@ export class AuthService {
       return false;
     }
   }
-
-
   public getCurrentUser() {
     Auth.currentAuthenticatedUser({
       bypassCache: false

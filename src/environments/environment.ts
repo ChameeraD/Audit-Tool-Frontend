@@ -6,9 +6,9 @@ export const environment = {
   production: false,
   host: 'http://localhost:3000',
   loginUrl: 'https://auth.winningproduct.com/'
-  + 'login?response_type=code&client_id=6r1eenlevnui1fe4epbp5vjfrn&redirect_uri=http://localhost:4200/audit/products',
-  redirectSignIn: 'http://localhost:4200/audit/products',
-  redirectSignOut: 'http://localhost:4200/audit/products',
+  + 'login?response_type=code&client_id=6r1eenlevnui1fe4epbp5vjfrn&redirect_uri=http://localhost:4200/auth',
+  redirectSignIn: 'http://localhost:4200/auth',
+  redirectSignOut: 'http://localhost:4200/auth',
 
 };
 

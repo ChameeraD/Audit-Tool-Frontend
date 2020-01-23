@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { JwtHelperService, JWT_OPTIONS  , JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from '@shared/services/auth/auth-guard.service';
 import { AuthService } from '@shared/services/auth/auth.service';
+import { AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { AuthService } from '@shared/services/auth/auth.service';
     AppRoutingModule,
     NgxsModule.forRoot(),
     HttpClientModule,
+    AmplifyAngularModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
@@ -31,7 +33,8 @@ import { AuthService } from '@shared/services/auth/auth.service';
     JwtHelperService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     AuthGuardService,
-    AuthService
+    AuthService,
+    AmplifyService
   ],
   bootstrap: [AppComponent],
 })

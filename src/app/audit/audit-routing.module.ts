@@ -16,17 +16,15 @@ const routes: Routes = [
   {
     path: 'products/:productId/phases',
     component: ViewPhasesComponent,
-    canActivate : [AuthGuard]
   },
   {
     path:
       'products/:productId/phases/:productPhaseId/knowledgeAreas/:knowledgeAreaId/question',
     component: ViewQuestionsComponent,
-    canActivate : [AuthGuard]
   },
-  { path: '**',
+  {
+  path: '**',
   component: ViewProductsComponent,
-  canActivate : [AuthGuard]
   },
 ];
 
