@@ -1,27 +1,3 @@
 <div class="container">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-      <a class="navbar-brand" href="#">
-        <img src="../assets/img/logo@2x.png" width="auto" height="24px"/>
-      </a>
-        <ul class="navbar-nav ml-auto flex-row">
-          <li class="nav-item active">
-            <div class="btn-group" dropdown>
-              <button dropdownToggle type="button" class="btn btn btn-link dropdown-toggle">
-                User <span class="caret"></span>
-              </button>
-              <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-                <li role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <p class="avatarLetters" data-letters="MN"></p>
-          </li>
-        </ul>
-    </nav>
-    <!-- <a [routerLink]="['/audit/projects']">link to Dashboard</a><br><a [routerLink]="['/audit/phases']">link to Phase View</a> -->
-
-    <router-outlet></router-outlet>
-    
+  <router-outlet></router-outlet>   
 </div>

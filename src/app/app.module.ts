@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule  } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,8 +12,14 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { JwtHelperService, JWT_OPTIONS  , JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from '@shared/services/auth/auth-guard.service';
+import { RoleGuardService } from '@shared/services/auth/role-guard.service';
 import { AuthService } from '@shared/services/auth/auth.service';
 import { AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
+import { AvatarModule } from 'ngx-avatar';
+import { MomentModule } from 'ngx-moment';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +29,14 @@ import { AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
     NgxsModule.forRoot(),
     HttpClientModule,
     AmplifyAngularModule,
+    AvatarModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    BrowserAnimationsModule,
+    MomentModule,
+    AccordionModule.forRoot(),
+    CollapseModule.forRoot(),
+    InfiniteScrollModule,
+
   ],
   providers: [
     {
@@ -34,7 +48,9 @@ import { AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     AuthGuardService,
     AuthService,
-    AmplifyService
+    AmplifyService,
+    RoleGuardService
+
   ],
   bootstrap: [AppComponent],
 })

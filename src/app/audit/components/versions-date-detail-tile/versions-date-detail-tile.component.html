@@ -1,0 +1,8 @@
+<div class="px-3 py-3 border-bottom border-light d-flex flex-row justify-content-between">
+  <a (click)="revert(versionDetail.id)">
+    <div>
+      <p class="mb-0">{{ versionDetail.createdDate | date: 'dd MMM y - hh:mm:ss a' }}</p>
+      <p class="mb-0">{{ versionDetail.firstName }} {{ versionDetail.lastName }}</p>
+    </div>
+  </a>
+</div>

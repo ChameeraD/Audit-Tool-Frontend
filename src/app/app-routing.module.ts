@@ -3,16 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import {
   AuthGuardService as AuthGuard
 } from './shared/services/auth/auth-guard.service';
-import { AppComponent } from './app.component';
+import {
+  RoleGuardService as RoleGuard
+} from './shared/services/auth/role-guard.service';
 const routes: Routes = [
   {
     path: 'audit',
     loadChildren: () => import('./audit/audit.module').then(m => m.AuditModule),
     canActivate : [AuthGuard]
-  },
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
     path: 'shared',
@@ -21,10 +19,19 @@ const routes: Routes = [
       canActivate : [AuthGuard]
   },
   {
-    path: '**',
-    loadChildren: () => import('./audit/audit.module').then(m => m.AuditModule),
-    canActivate : [AuthGuard]
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate : [AuthGuard, RoleGuard]
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+    canActivate : [AuthGuard]
+  }
 ];
 
 @NgModule({

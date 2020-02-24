@@ -15,15 +15,15 @@ jobs:
             # Restore local dependencies from cache
             - restore_cache:
                 keys:
-                - v3-dependencies-{{ checksum "package.json" }}
-                - v3-dependencies-
+                - v4-dependencies-{{ checksum "package.json" }}
+                - v4-dependencies-
             # Install project dependencies
             - run:
                 name: Install local dependencies
                 command: npm install
             # Cache local dependencies if they don't exist
             - save_cache:
-                key: v3-dependencies-{{ checksum "package.json" }}
+                key: v4-dependencies-{{ checksum "package.json" }}
                 paths:
                     - node_modules
             # Test the source code
@@ -38,13 +38,13 @@ jobs:
                     if [ "${CIRCLE_BRANCH}" == "staging" ]; then
                         npm run build:qa
                     elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-                        npm run build:prod
+                        npm run build
                     else
                         npm run build
                     fi
             # Cache the dist folder for the deploy job
             - save_cache:
-                key: v3-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+                key: v4-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
                 paths:
                     - dist
 
@@ -61,7 +61,7 @@ jobs:
             # Restore cache from the build job which contains the
             # dist folder that needs to be deployed
             - restore_cache:
-                key: v3-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+                key: v4-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
             # Install AWS cli
             - run:
                 name: Install aws cli
@@ -81,6 +81,21 @@ jobs:
                         aws --region ap-south-1 s3 sync dist/auditTool s3://audit-tool-frontend-stage/ --delete --acl public-read
                     elif [ "${CIRCLE_BRANCH}" == "master" ]; then
                         aws --region ap-south-1 s3 sync dist/auditTool s3://winningproduct/ --delete --acl public-read
+                    fi
+            # ACTIVATE CLOUD FRONT CLI
+            - run:
+                name: activate cloud front
+                command: |
+                    if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                        aws configure set preview.cloudfront true
+                        aws configure set preview.create-invalidation true
+                    fi
+            #Invalidate Cloudfront
+            - run:
+                name: "Invalidate CloudFront Cache"
+                command: |
+                    if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                        aws cloudfront create-invalidation --distribution-id E1COGN6E52FC04 --paths /*
                     fi
 
     #sonar clould validation

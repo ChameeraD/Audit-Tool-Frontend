@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Question } from '@shared/models/question';
 import { Evidence } from '@shared/models/evidence';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EvidenceApiService } from '@shared/services/api/evidence.service';
 import { ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import MediumEditor from 'medium-editor';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '@shared/services/auth/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 const BUTTONS = [
   'bold',
@@ -38,9 +40,21 @@ export class EvidenceBoxComponent implements OnInit, AfterViewInit {
   editor: any;
   evidence: Evidence[];
   productId: number;
-  isAddButtonClicked = false;
+  hideSaveButton = true;
   selectedStatus = null;
   isStatusUpdated = false;
+  submitEvidence = false;
+  statusColor = '';
+
+  content: '';
+
+  statusColorValues = [
+    { id: 0 , value: ''},
+    { id: 1, value: 'input-teal'},
+    { id: 2, value: 'input-blue'},
+    { id: 3, value: 'input-warning'},
+    { id: 4, value: 'input-grey'},
+  ];
 
   statusDropDowns = [
     { id: 1, value: 'Fully Complied' },
@@ -52,13 +66,19 @@ export class EvidenceBoxComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private evidenceService: EvidenceApiService,
+    private userService: AuthService,
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   async ngOnInit() {
+    this.spinner.show();
     this.route.params.subscribe(async params => {
-      this.productId = +params.productId;
+      this.productId = +params['product-id'];
     });
     await this.getEvidenceByQuestionId(this.productId, this.question.id);
+    console.log(2);
+    this.spinner.hide();
   }
 
   async getEvidenceByQuestionId(id: number, qid: number) {
@@ -75,23 +95,27 @@ export class EvidenceBoxComponent implements OnInit, AfterViewInit {
         }) || { id: null, value: '' }
       ).id;
     this.editor.setContent(this.evidence[0] ? this.evidence[0].content : '');
+    this.statusColor = this.statusColorValues[this.selectedStatus ? this.selectedStatus : 4].value;
   }
 
   async postEvidenceByQuestionId(qid: number, status: number) {
-    this.isAddButtonClicked = true;
+    this.submitEvidence = true;
+    this.hideSaveButton = false;
     const evidence = new Evidence();
     evidence.productId = this.productId;
-    evidence.userId = 1;
+    evidence.userId = await this.userService.getCurrentUserId();
     evidence.content = this.editor.getContent();
     evidence.version = '1';
-    evidence.status = this.statusDropDowns.find(i => i.id === status).value;
+    evidence.status = (this.statusDropDowns.find(i => i.id === status) || { id: null , value: ''} ).value;
     try {
       await this.evidenceService.post(qid, evidence);
+      this.content = this.editor.getContent();
     } catch (error) {
       console.log(error);
     } finally {
       setTimeout(() => {
-        this.isAddButtonClicked = true;
+        this.hideSaveButton = true;
+        this.submitEvidence = false;
       }, 1000);
     }
   }
@@ -129,11 +153,13 @@ export class EvidenceBoxComponent implements OnInit, AfterViewInit {
   }
 
   async updateStatus(status: any) {
-    this.isAddButtonClicked = true;
     this.isStatusUpdated = true;
-    console.log(this.evidence);
     const id = this.evidence[0].id;
+    this.statusColor = this.statusColorValues[status ? status.id : 4].value;
     try {
+      if ( !status ) {
+        return ;
+      }
       await this.evidenceService.updateStatus(
         this.question.id,
         status.value,
@@ -142,8 +168,26 @@ export class EvidenceBoxComponent implements OnInit, AfterViewInit {
     } catch (error) {
       console.log(error);
     } finally {
-      this.isAddButtonClicked = false;
       this.isStatusUpdated = false;
     }
   }
+
+  toggleButton() {
+    this.content = this.editor.getContent();
+    this.hideSaveButton = false;
+  }
+
+  cancelButton() {
+    this.editor.setContent(this.content);
+    this.hideSaveButton = true;
+  }
+
+  navigate() {
+    this.router.navigateByUrl('/audit/products/'
+    + this.productId
+    + '/phases/knowledge-areas/question/'
+    + this.question.id
+    + '/evidence/versions');
+  }
+
 }

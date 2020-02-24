@@ -7,6 +7,7 @@ import {
 import { ViewProductsComponent } from './containers/view-products/view-products.component';
 import { ViewPhasesComponent } from './containers/view-phases/view-phases.component';
 import { ViewQuestionsComponent } from './containers/view-questions/view-questions.component';
+import { ViewEvidenceHistoryComponent } from './containers/view-evidence-history/view-evidence-history.component';
 
 const routes: Routes = [
   {
@@ -14,17 +15,24 @@ const routes: Routes = [
     component: ViewProductsComponent,
   },
   {
-    path: 'products/:productId/phases',
+    path: 'products/:product-id/phases',
     component: ViewPhasesComponent,
+    canActivate : [AuthGuard]
   },
   {
     path:
-      'products/:productId/phases/:productPhaseId/knowledgeAreas/:knowledgeAreaId/question',
+      'products/:product-id/phases/:product-phase-id/knowledge-areas/:knowledge-area-id/question',
     component: ViewQuestionsComponent,
+    canActivate : [AuthGuard]
   },
   {
-  path: '**',
+    path: 'products/:product-id/phases/knowledge-areas/question/:question-id/evidence/versions',
+    component: ViewEvidenceHistoryComponent,
+    canActivate : [AuthGuard]
+  },
+  { path: '**',
   component: ViewProductsComponent,
+  canActivate : [AuthGuard]
   },
 ];
 

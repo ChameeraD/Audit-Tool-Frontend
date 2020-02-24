@@ -1,22 +1,32 @@
+<ngx-spinner
+bdOpacity = 1
+bdColor = "#fff"
+size = "medium"
+color = "#cf46ff"
+type = "fire"
+[fullScreen] = "true"
+>
+</ngx-spinner>
+<app-nav-bar></app-nav-bar>
 <div class="row mt-2">
-  <div class="col-12 col-sm-12 col-md-12 col-lg-10 offset-lg-1">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-10 offset-lg-1 phaseDiv">
     <nav aria-label="breadcrumb" class="mt-4">
       <ol class="breadcrumb bg-white px-0">
-        <li class="breadcrumb-item"><a href="#">Product</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/audit/products/']">Product</a></li>
+        <li *ngIf="product != null" class="breadcrumb-item"><a [routerLink]="['/audit/products/', product[0].id, 'phases']">{{ product[0].name }}</a></li>
         <li
           class="breadcrumb-item active"
           aria-current="page"
-          *ngIf="product != null"
+          *ngIf="phase != null"
         >
-          {{ product[0].name }}
+          {{ phase[0].name }}
         </li>
       </ol>
     </nav>
-    <h5 class="mb-4">Knowledge Areas</h5>
     <div *ngIf="items.length" class="col-12 py-3">
       <carousel
         *ngIf="items != null"
-        [itemsPerSlide]="lcarouselLength"
+        [itemsPerSlide]="5"
         [singleSlideOffset]="true"
         [indicatorsByChunk]="true"
         [showIndicators]="false"
@@ -27,10 +37,9 @@
           [productId]="productId"
           [phaseId]="phaseId"
           *ngFor="let item of items; let index = index"
-          style="width:100%"
         ></app-knowledge-area-slide>
       </carousel>
-      <div class="mt-5">
+      <div class="mt-5" >
         <app-evidence-box
           [question]="question"
           [index]="index"

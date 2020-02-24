@@ -1,15 +1,24 @@
+<ngx-spinner
+bdOpacity = 1
+bdColor = "#fff"
+size = "medium"
+color = "#cf46ff"
+type = "fire"
+[fullScreen] = "true"
+>
+</ngx-spinner>
 <div class="card border-0 mb-4">
   <div class="card-body">
     <p class="h6">{{ index + 1 }}. {{ question.title }}</p>
+    <button (click)="navigate()">Versions</button>
     <div class="d-flex mb-1">
-      <p class="text-secondary mb-0">
-        {{ question.description }}
-      </p>
+      <div [innerHtml]="question.description" class="text-secondary mb-0">
+      </div>
     </div>
     <div class="d-flex">
       <div class="container mt-3">
         <div class="row justify-content-center">
-          <div #editable class="col-12 px-0"></div>
+          <div #editable class="col-12 px-0" (click)="toggleButton()"></div>
         </div>
       </div>
     </div>
@@ -17,21 +26,18 @@
   <div class="card-footer bg-white border-0">
     <div
       class="footer-actions d-flex flex-column flex-md-row align-items-md-center justify-content-md-between">
-      <div class="mb-md-0 mb-2">
-        <button
-          type="submit"
-          class="btn btn-primary"
-          (click)="postEvidenceByQuestionId(question.id, selectedStatus)"
-          [disabled]="isAddButtonClicked || !selectedStatus"
-        >
-          Add
-        </button>
-      </div>
+      
       <div>
-        <div class="input-group" style="min-width:320px;">
+        <div class="input-group" [ngClass]="statusColor" style="min-width:320px;">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">
-              <fa-icon [icon]="faSpinner" class="text-secondary fa-spin mr-2"></fa-icon>Status</label>
+            <label class="input-group-text" for="inputGroupSelect01"
+            ><fa-icon
+              *ngIf="isStatusUpdated"
+              [icon]="faSpinner"
+              class="text-secondary fa-spin mr-2"
+            ></fa-icon>
+            </label
+          >
           </div>
           <ng-select
             class="custom-select"
@@ -45,6 +51,33 @@
           </ng-select>
         </div>
       </div>
-    </div>
+      <div class="d-flex flex-row flex-md-row align-items-md-center py-1">
+        <div class="mb-md-0 mb-2" style="padding-right:5px">
+        
+          <button
+            type="submit"
+            class="btn btn-primary d-flex"
+            (click)="postEvidenceByQuestionId(question.id, selectedStatus)"
+            *ngIf="!hideSaveButton"
+          >
+          <fa-icon
+          [icon]="faSpinner"
+          *ngIf="submitEvidence"
+          class="text-white fa-spin mr-2 "
+        ></fa-icon>
+            Save
+          </button>
+        </div>
+        <div class="mb-md-0 mb-2">
+          <button
+            type="submit"
+            class="btn btn-mid d-flex"
+            (click)="cancelButton()"
+            *ngIf="!hideSaveButton"
+          >
+            Cancel
+          </button>
+      </div>
+      </div>
   </div>
 </div>

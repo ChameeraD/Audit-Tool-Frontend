@@ -1,20 +1,30 @@
+<ngx-spinner
+bdOpacity = 1
+bdColor = "#fff"
+size = "medium"
+color = "#cf46ff"
+type = "fire"
+[fullScreen] = "true"
+>
+</ngx-spinner>
+<app-nav-bar></app-nav-bar>
 <div class="row mt-4">
-  <div class="col-12 col-sm-12 col-md-12 col-lg-10 offset-lg-1">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-10 offset-lg-1 phaseDiv">
     <div class="card border-0 bg-light" *ngIf="products != null">
       <div class="card-body">
-        <div class="d-flex flex-row justify-content-between align-items-start">
+        <div class="d-flex flex-row align-items-start">
           <div>
-            <p class="avatarLetters" data-letters="MN"></p>
+            <ngx-avatar size="40" bgColor=#8e44ad name="{{products[0].name}}"></ngx-avatar>
           </div>
           <div class="ml-3">
             <p class="h6">{{products[0].name}}</p>
             <p>{{products[0].description}}</p>
           </div>
         </div>
-        <div class="d-flex flex-column align-items-end">
+        <!--div class="d-flex flex-column align-items-end">
           <p class="text-secondary mb-1"><b>0/9 Completed</b></p>
           <progressbar style="height: 8px;" [value]="55" type="success"></progressbar>
-        </div>
+        </div-->
       </div>
     </div>
     <nav aria-label="breadcrumb" class="mt-4" *ngIf="products != null">

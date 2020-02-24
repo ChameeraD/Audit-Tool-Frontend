@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <a class="navbar-brand" routerLink="/audit/products">
+        <img src="../assets/img/logo@2x.png" width="auto" height="24px" />
+    </a>
+    <ul class="navbar-nav ml-auto flex-row">
+        <li class="nav-item">
+            <ngx-avatar *ngIf="userName != null" size="40" bgColor=#8e44ad name="{{userName}}"></ngx-avatar>
+            <ngx-avatar *ngIf="userName == null" size="40" bgColor=#8e44ad name="{{userName}}"></ngx-avatar>
+        </li>
+        <li class="nav-item active">
+            <div class="btn-group" dropdown>
+                <button dropdownToggle type="button" class="btn btn btn-link dropdown-toggle">
+                    {{currentUser ? currentUser.given_name : userName }} <span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li role="menuitem"><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+                </ul>
+            </div>
+        </li>
+        
+    </ul>
+</nav>

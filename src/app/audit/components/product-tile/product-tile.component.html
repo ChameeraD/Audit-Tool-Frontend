@@ -1,32 +1,33 @@
-<div class="card border-0 shadow-sm">
+<ngx-spinner
+bdOpacity = 1
+bdColor = "#fff"
+size = "medium"
+color = "#cf46ff"
+type = "fire"
+[fullScreen] = "true"
+>
+</ngx-spinner>
+<div class="card border-0 shadow-sm product-tile product-tile-h">
   <a [routerLink]="['/audit/products/', product.id, 'phases']">
     <div class="card-header d-flex flex-row justify-content-between align-items-start bg-white border-0">
-      <ngx-avatar bgColor=#8e44ad name="{{product.name}}"></ngx-avatar>
+      <ngx-avatar size="40"  bgColor=#8e44ad name="{{product.name}}"></ngx-avatar>
       <fa-icon [icon]="faEllipsisV" class="text-secondary"></fa-icon>
     </div>
     <div class="card-body pt-0">
       <p class="h6 text-dark">{{ product.name }}</p>
-      <p class="mt-3 text-dark">{{ product.description }}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta felis tellus.</p>
+      <p class="mt-3 text-dark text-justify">{{ product.description }}</p>
       <div class="facePile d-flex flex-row justify-content-center align-items-center py-3">
-        <div class="facePile-img">
-          <img src="http://www.facetheforce.today/random/400?r=1" width="32px" height="32px" class="rounded-circle"
-                alt="" />
-          <img src="http://www.facetheforce.today/random/400?r=2" width="32px" height="32px" class="rounded-circle"
-                alt="" />
-          <img src="http://www.facetheforce.today/random/400?r=3" width="32px" height="32px" class="rounded-circle"
-                alt="" />
-          <img src="http://www.facetheforce.today/random/400?r=4" width="32px" height="32px" class="rounded-circle"
-                alt="" />
+        <div *ngFor="let user of firstUsers , let i = index" class="facePile-more d-flex align-items-center justify-content-center" tooltip="{{user.firstName}}">      
+          <ngx-avatar size="35" bgColor="{{colors[i]}}" name="{{user.firstName}} {{user.lastName}}" tooltip="{{user.firstName}} {{user.lastName}}" ></ngx-avatar>
         </div>
-        <div class="facePile-more">
-          <img src="../../../../assets/img/facepile-plus.png" width="32px" height="32px" class="rounded-circle"
-                alt="" />
+      
+        <div *ngIf="userCount" class="facePile-more d-flex align-items-center justify-content-center">
+          <ngx-avatar size="35" bgColor=#E3D0EB name="+ {{userCount}}" tooltip="+{{userCount}} more"></ngx-avatar>
         </div>
       </div>
-      <div class="progressBar pt-5 pb-1">
+      <!--div class="progressBar pt-5 pb-1">
         <progressbar style="height: 8px;" [value]="55" type="success"></progressbar>
-      </div>
+      </div-->
     </div>
   </a>
 </div>
-

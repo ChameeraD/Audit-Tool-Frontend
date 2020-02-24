@@ -27,8 +27,19 @@
   }
 
   .facePile-more {
-    img {
-      margin-left: -8px;
-    }
+    width:32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-left: -8px;
   }
+}
+
+.product-tile{
+  &:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  }
+}
+
+.product-tile-h {
+  height:100%;
 }
