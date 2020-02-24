@@ -45,6 +45,7 @@ export class VersionsTabComponent implements OnInit {
           break;
         }
       }
+
       if (obj === null) {
         this.dates.push({
           name: newDate,
@@ -58,7 +59,7 @@ export class VersionsTabComponent implements OnInit {
   }
 
   onScroll() {
-    this.pageId = this.pageId + 2;
+    this.pageId = this.pageId + 20; // No of Records to skip - Same as the backend query
     this.getEvidenceSummary();
   }
 

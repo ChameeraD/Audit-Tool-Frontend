@@ -20,8 +20,7 @@ export class VersionsDateGroupTileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.date.name === 'Today' || this.date.name === 'Yesterday') {
-      this.date.name = this.date.value;
+    if (this.date.name === 'Today' || this.date.name === 'Yesterday' || this.date.name.includes('Last')) {
       this.isDay = true;
     }
     this.innerDates = this.date.value;
